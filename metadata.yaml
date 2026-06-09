@@ -1,0 +1,8 @@
+name: astrbot_plugin_image2
+desc: QQ image2 API image generation plugin for AstrBot.
+version: v1.0.0
+author: custom
+repo: ""
+support_platforms:
+  - aiocqhttp
+astrbot_version: ">=4.16.0,<5"

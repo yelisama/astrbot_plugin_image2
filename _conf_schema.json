@@ -1,0 +1,116 @@
+{
+  "providers": {
+    "description": "Provider chain backend list. Multiple providers can be configured and referenced by id.",
+    "type": "list",
+    "default": [
+      {
+        "id": "image2",
+        "enabled": true,
+        "template_key": "image2",
+        "base_url": "https://your-image2-endpoint/v1",
+        "api_key": "",
+        "model": "image2",
+        "default_size": "1024x1024",
+        "supports_edit": true,
+        "timeout": 120,
+        "max_retries": 2,
+        "extra_body": {}
+      }
+    ]
+  },
+  "features": {
+    "description": "Feature switches and provider chains.",
+    "type": "object",
+    "default": {
+      "draw": {
+        "enabled": true,
+        "llm_tool_enabled": true,
+        "default_output": "1024x1024",
+        "chain": [
+          "image2"
+        ]
+      },
+      "edit": {
+        "enabled": true,
+        "llm_tool_enabled": true,
+        "default_output": "1024x1024",
+        "chain": [
+          "image2"
+        ],
+        "presets": []
+      },
+      "selfie": {
+        "enabled": true,
+        "llm_tool_enabled": true,
+        "default_output": "1024x1024",
+        "chain": [],
+        "reference_images": [],
+        "prompt_prefix": "请根据参考图生成一张新的自拍照：保持第1张参考图的人脸身份特征，其余参考图只作为服装、姿势、构图或场景参考。输出高质量照片风格自拍，不要拼图，不要水印。"
+      }
+    }
+  },
+  "access_control": {
+    "description": "QQ-only user/group whitelist and blacklist. Blacklist has priority. Denied requests fail silently.",
+    "type": "object",
+    "default": {
+      "enabled": false,
+      "whitelist_mode": false,
+      "user_whitelist": [],
+      "group_whitelist": [],
+      "user_blacklist": [],
+      "group_blacklist": []
+    }
+  },
+  "emoji_feedback": {
+    "description": "QQ emoji reaction feedback on the original message.",
+    "type": "object",
+    "default": {
+      "enabled": true,
+      "processing": 125,
+      "success": 79,
+      "failed": 106
+    }
+  },
+  "max_user_concurrency": {
+    "description": "Maximum simultaneous generation tasks for the same QQ user.",
+    "type": "int",
+    "default": 3
+  },
+  "max_global_concurrency": {
+    "description": "Maximum simultaneous generation tasks for the whole plugin.",
+    "type": "int",
+    "default": 10
+  },
+  "busy_message": {
+    "description": "Message sent when user or global generation concurrency is full.",
+    "type": "string",
+    "default": "当前你的生图任务较多，请稍后再试。"
+  },
+  "debounce_interval": {
+    "description": "Duplicate-message debounce window in seconds.",
+    "type": "int",
+    "default": 3
+  },
+  "storage": {
+    "description": "Local generated image cache settings.",
+    "type": "object",
+    "default": {
+      "max_cached_images": 50
+    }
+  },
+  "network": {
+    "description": "Network safety policy for downloading generated or input image URLs.",
+    "type": "object",
+    "default": {
+      "media_allow_private": false,
+      "max_image_bytes": 52428800,
+      "max_redirects": 5,
+      "dns_resolve_timeout_seconds": 2
+    }
+  },
+  "timeout": {
+    "description": "Default provider timeout in seconds.",
+    "type": "int",
+    "default": 120
+  }
+}
